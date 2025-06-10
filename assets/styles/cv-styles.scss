@@ -281,6 +281,10 @@ body {
   position: relative;
   padding-left: 2rem;
 
+  @media screen and (max-width: 460px) {
+    padding-left: 0;
+  }
+
   &::before {
     content: '';
     position: absolute;
