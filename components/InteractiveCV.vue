@@ -42,6 +42,29 @@
 
 			<!-- Skills Progress Bars -->
 			<section class="cv-section">
+				<h3><Icon icon="mdi:code-json" /> About me</h3>
+				<p class="description-text">
+					Passionate and detail-oriented Front-End Developer with 3+ years of
+					experience in building responsive, high-performance web applications
+					using Vue.js. Skilled in developing dynamic user interfaces,
+					optimizing front-end performance, and integrating with RESTful APIs.
+					Strong expertise in Vue 2/3, Pinia/Vuex, Vue Router, PWA, and modern
+					JavaScript (ES6+). Committed to writing clean, maintainable code while
+					following best practices in UI/UX design and web accessibility.
+				</p>
+			</section>
+
+			<section class="cv-section">
+				<h3><Icon icon="mdi:code-json" /> What I Bring</h3>
+				<ul class="accomplishments">
+					<li v-for="(item, i) in myPropose" :key="i">
+						<Icon icon="mdi:check-circle" class="accomplishment-icon" />
+						{{ item }}
+					</li>
+				</ul>
+			</section>
+
+			<section class="cv-section">
 				<h3><Icon icon="mdi:code-json" /> Core Competencies</h3>
 				<div class="skills-progress">
 					<div v-for="skill in coreSkills" :key="skill.name" class="skill-item">
@@ -136,7 +159,6 @@
 <script setup>
 import { ref } from 'vue';
 import { Icon } from '@iconify/vue';
-import html2pdf from 'html2pdf.js';
 
 const cvContent = ref(null);
 const darkMode = ref(false);
@@ -167,11 +189,11 @@ const contactItems = {
 		value: 'linkedin.com',
 		link: 'https://linkedin.com/in/ivan-t-62b742115',
 	},
-	portfolio: {
-		icon: 'mdi:web',
-		value: 'vueportfolio.dev',
-		link: 'https://vueportfolio.dev',
-	},
+	// portfolio: {
+	// 	icon: 'mdi:web',
+	// 	value: 'vueportfolio.dev',
+	// 	link: 'https://vueportfolio.dev',
+	// },
 };
 
 const coreSkills = [
@@ -183,6 +205,13 @@ const coreSkills = [
 	{ name: 'UI/UX Design', level: 80 },
 	{ name: 'Performance Optimization', level: 87 },
 	{ name: 'HTML5/CSS3', level: 90 },
+];
+
+const myPropose = [
+	'Strong problem-solving skills and a passion for creating seamless user experiences.',
+	'Experience in optimizing applications for speed, scalability, and SEO.',
+	'Collaboration with back-end developers and designers to deliver high-quality products.',
+	'Continuous learning and adapting to new front-end technologies and trends.',
 ];
 
 const experience = [
@@ -242,7 +271,9 @@ const projects = [
 	},
 ];
 
-const generatePDF = () => {
+const generatePDF = async () => {
+	const html2pdf = useNuxtApp().$html2pdf;
+
 	const opt = {
 		margin: 10,
 		filename: `${personalInfo.name.replace(' ', '_')}_CV.pdf`,
@@ -257,11 +288,11 @@ const generatePDF = () => {
 			unit: 'mm',
 			format: 'a4',
 			orientation: 'portrait',
-			hotfixes: ['px_scaling'],
+			// hotfixes: ['px_scaling'],
 		},
 	};
 
-	console.log(opt);
+	console.log(cvContent.value);
 
 	html2pdf().set(opt).from(cvContent.value).save();
 };
