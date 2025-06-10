@@ -1,22 +1,15 @@
 <template>
 	<div class="cv-app" :class="{ 'dark-mode': darkMode }">
+		<div class="theme-toggle" @click="darkMode = !darkMode">
+			<Icon
+				:icon="darkMode ? 'mdi:weather-sunny' : 'mdi:weather-night'"
+				width="24" />
+		</div>
 		<div ref="cvContent" class="cv-container">
 			<!-- Header with theme toggle -->
 			<header class="cv-header">
-				<div class="theme-toggle" @click="darkMode = !darkMode">
-					<Icon
-						:icon="darkMode ? 'mdi:weather-sunny' : 'mdi:weather-night'"
-						width="24" />
-				</div>
 				<div class="profile-section">
-					<div class="avatar-placeholder">
-						<picture>
-							<source
-								srcset="~/assets/images/avatar.jpg"
-								src="~/assets/images/avatar.jpg" />
-							<img alt="avatar" src="~/assets/images/avatar.jpg" />
-						</picture>
-					</div>
+					<div class="avatar-placeholder"></div>
 					<div>
 						<h1>{{ personalInfo.name }}</h1>
 						<h2>{{ personalInfo.title }}</h2>
@@ -143,15 +136,14 @@
 					</div>
 				</div>
 			</section>
-
-			<div class="action-buttons">
-				<button @click="generatePDF" class="download-btn pulse">
-					<Icon icon="mdi:file-pdf-box" /> Export PDF
-				</button>
-				<button @click="printCV" class="print-btn">
-					<Icon icon="mdi:printer" /> Print CV
-				</button>
-			</div>
+		</div>
+		<div class="action-buttons">
+			<button @click="generatePDF" class="download-btn pulse">
+				<Icon icon="mdi:file-pdf-box" /> Export PDF
+			</button>
+			<button @click="printCV" class="print-btn">
+				<Icon icon="mdi:printer" /> Print CV
+			</button>
 		</div>
 	</div>
 </template>
@@ -256,18 +248,16 @@ const experience = [
 
 const projects = [
 	{
-		name: 'E-commerce Platform',
-		description:
-			'High-performance Nuxt.js e-commerce platform with SSR and PWA support',
-		technologies: ['Nuxt 3', 'Pinia', 'Stripe API', 'Tailwind CSS'],
-		github: 'https://github.com/vue-master/ecommerce-platform',
-		demo: 'https://vue-store.example.com',
-	},
-	{
-		name: 'Admin Dashboard',
-		description: 'Custom Vue 3 admin dashboard with real-time analytics',
-		technologies: ['Vue 3', 'D3.js', 'WebSockets', 'JWT Auth'],
-		github: 'https://github.com/vue-master/admin-dashboard',
+		name: 'Hot Vape Shop',
+		description: 'Nuxt.js e-commerce shop with SSR and PWA support',
+		technologies: [
+			'Nuxt 2',
+			'Vuex',
+			'Custom admin',
+			'JWT Auth',
+			'@nuxtjs/auth-next',
+		],
+		demo: 'https://hotvape.shop',
 	},
 ];
 
